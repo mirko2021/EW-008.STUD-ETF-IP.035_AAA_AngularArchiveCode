@@ -1,0 +1,36 @@
+<h2>Flight works!</h2>
+<hr>
+<form [formGroup]="flightForm">
+    <div class="flight-form">
+       <label for="username">Запослени : </label><br> 
+       <input type="text" id='username' name="username" [(ngModel)]='username' [ngModelOptions]='{standalone: true}' required><br><br>
+       <label for="password">Лозинка : </label><br>
+       <input type="password" id='password'name="password" required [(ngModel)]='password' [ngModelOptions]='{standalone: true}'><br><br>
+       <label for="old_fly_id">Идентификација летова : </label><br>
+       <input type="text" id='old_fly_id' name="old_fly_id" [(ngModel)]='oldFlyId' [ngModelOptions]='{standalone: true}' required><br><br>
+       <label for="neo_fly_id">Нова идентификација летова : </label><br>
+       <input type="text" id='neo_fly_id' name="neo_fly_id" [(ngModel)]='neoFlyId' [ngModelOptions]='{standalone: true}' required><br><br>
+       <label for="fly_date">Времена/датуми летова : </label><br>
+       <textarea required id='fly_date'   name='fly_date' [(ngModel)]='flyDate' [ngModelOptions]='{standalone: true}'></textarea><br><br>
+       <label for="relation">Релација : </label><br>
+       <textarea required id='relation'   name='relation' [(ngModel)]='relation' [ngModelOptions]='{standalone: true}'></textarea><br>
+    </div>
+    <br>
+    <button type="submit" name='submit_insert' (click)='submitInsert()'>Додавање</button>
+    <button type="submit" name='submit_erase'  (click)='submitErase()'>брисање</button>
+    <button type="submit" name='submit_update' (click)='submitUpdate()'>измјена</button>
+ </form>
+ <hr>
+
+ <table>
+      <tr>
+         <th>Лет</th>
+         <th>вријеме</th>
+         <th>релација</th>
+      </tr>
+      <tr *ngFor='let flight of flights' (click)='toForm(flight)'>
+         <td>{{ flight.flightId   }}</td>
+         <td>{{ flight.flightDate }}</td>
+         <td>{{ flight.relation   }}</td>
+      </tr>
+ </table>

@@ -1,0 +1,65 @@
+<h2>Messages works!</h2>
+<hr>
+<label for="username">Запослени : </label><br> 
+<input type="text" id='username' name="username" [(ngModel)]='username' [ngModelOptions]='{standalone: true}' required><br><br>
+<label for="password">Лозинка : </label><br>
+<input type="password" id='password'name="password" required [(ngModel)]='password' [ngModelOptions]='{standalone: true}'><br><br>
+<hr>
+<p>НЕПРОЧИТАНЕ ПОРУКЕ</p>
+<div *ngFor='let reservation of non_read_messages'>
+    <table class='data_table'>
+        <tr>
+            <td style='width: 100px'>Порука: </td>
+            <td><code>{{ reservation.message.messageId }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Корисник: </td>
+            <td><code>{{ reservation.message.username }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Створено: </td>
+            <td><code>{{ reservation.fmt.created }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Промјењено: </td>
+            <td><code>{{ reservation.fmt.changed }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Е-Пошта: </td>
+            <td><code><a style='text-decoration: none;' *ngIf='reservation.email.address != ""' [href]='["mailto:"]+reservation.email.address'>{{ reservation.email.address }}</a></code></td>
+        </tr>
+        <tr><td colspan='2'>Садржај: </td></tr>
+        <tr><td colspan='2'><code style='white-space: pre;'>{{ reservation.message.messageContent }}</code></td></tr>
+    </table>
+    <button (click)='sentRead(reservation.message.messageId)'>Прочитано</button>
+    <br><br>
+</div>
+
+<p>ПРОЧИТАНЕ ПОРУКЕ</p>
+<div *ngFor='let reservation of read_messages'>
+    <table class='data_table'>
+        <tr>
+            <td style='width: 100px'>Порука: </td>
+            <td><code>{{ reservation.message.messageId }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Корисник: </td>
+            <td><code>{{ reservation.message.username }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Створено: </td>
+            <td><code>{{ reservation.fmt.created }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Промјењено: </td>
+            <td><code>{{ reservation.fmt.changed }}</code></td>
+        </tr>
+        <tr>
+            <td style='width: 100px'>Е-Пошта: </td>
+            <td><code><a style='text-decoration: none;' *ngIf='reservation.email.address != ""' [href]='["mailto:"]+reservation.email.address'>{{ reservation.email.address }}</a></code></td>
+        </tr>
+        <tr><td colspan='2'>Садржај: </td></tr>
+        <tr><td colspan='2'><code style='white-space: pre;'>{{ reservation.message.messageContent }}</code></td></tr>
+    </table>
+    <br>
+</div>

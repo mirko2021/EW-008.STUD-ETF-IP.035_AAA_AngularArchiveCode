@@ -1,0 +1,46 @@
+<h2>Reservations works!</h2>
+<hr>
+<form [formGroup]="reservationsForm">
+    <label for="username">Запослени : </label><br> 
+    <input type="text" id='username' name="username" [(ngModel)]='username' [ngModelOptions]='{standalone: true}' required><br><br>
+    <label for="password">Лозинка : </label><br>
+    <input type="password" id='password'name="password" required [(ngModel)]='password' [ngModelOptions]='{standalone: true}'><br><br>
+    <label for="old_reservation_id">Идентификација резервације : </label><br> 
+    <input type="text" id='old_reservation_id' name="old_reservation_id" [(ngModel)]='old_reservation_id' [ngModelOptions]='{standalone: true}' required><br><br>
+    <label for="neo_reservation_id">Нова идентификација резервације : </label><br> 
+    <input type="text" id='neo_reservation_id' name="neo_reservation_id" [(ngModel)]='neo_reservation_id' [ngModelOptions]='{standalone: true}' required><br><br>
+    <label for="fly_id">Идентификација лета : </label><br> 
+    <input type="text" id='fly_id' name="fly_id" [(ngModel)]='fly_id' [ngModelOptions]='{standalone: true}' required><br><br>
+    <label for="target_username">Циљни корисник : </label><br> 
+    <input type="text" id='target_username' name="target_username" [(ngModel)]='target_username' [ngModelOptions]='{standalone: true}' required><br><br>
+    <label for="place_count">Број мјеста за путнике : </label><br> 
+    <input type="text" id='place_count' name="place_count" [(ngModel)]='place_count' [ngModelOptions]='{standalone: true}' required class=''><br><br>
+    <label for="article_description">Опис робе за превоз : </label><br>
+    <textarea id='article_description' name="article_description" [(ngModel)]='article_description' [ngModelOptions]='{standalone: true}' required><br><br></textarea><br><br>
+    <label for="article_transport_spec_file">Датотека спецификације превоза робе : </label><br> 
+    <input type="file" id='article_transport_spec_file' name="article_transport_spec_file" (change)="handleFileInput($event.target)" required><br><br><br>
+    <button type="submit" name='submit_insert' (click)='submitInsert()'>Додавање</button>
+    <button type="submit" name='submit_erase'  (click)='submitErase()'>брисање</button>
+    <button type="submit" name='submit_update' (click)='submitUpdate()'>измјена</button>
+    <button type="submit" name='submit_upload_file' (click)='submitUploadFile()'>постављање датотеке</button>
+    <button type="submit" name='submit_reset_file' (click)='submitResetFile()'>поништавање датотеке</button>
+</form>
+<hr>
+<table>
+    <tr>
+       <th>Резервација</th>
+       <th>корисик</th>
+       <th>лет</th>
+       <th>број путника</th>
+       <th>опис робе</th>
+       <th>спецификација транспорта</th>
+    </tr>
+    <tr *ngFor='let reservation of reservations'>
+       <td (click)='toForm(reservation)'>{{ reservation.reservationId  }}</td>
+       <td (click)='toForm(reservation)'>{{ reservation.username }}</td>
+       <td (click)='toForm(reservation)'>{{ reservation.flyId  }}</td>
+       <td (click)='toForm(reservation)'>{{ reservation.placeCount }}</td>
+       <td (click)='toForm(reservation)'>{{ reservation.articleDescription }}</td>
+       <td><a [href]='generateLink(reservation.reservationId)' target='_blank'>{{ reservation.fmt.astf_name }}</a></td>
+    </tr>
+</table>
